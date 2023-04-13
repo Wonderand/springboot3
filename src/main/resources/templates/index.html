@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        div{
+            width: 900px;
+            margin: 20px auto;
+        }
+        table{width:900px;margin: 10px auto;border-collapse: collapse;}
+        thead th{border:2px solid black;background:blue;color:white;padding: 5px;}
+        tbody td{border: 1px solid black;text-align: center;padding: 5px;}
+    </style>
+    <script>
+        function addUser(){
+            var numObj = document.getElementById("num");
+            var nameobj = document.getElementById("name");
+            var bthObj = document.getElementById("birthday");
+
+            var num = numObj.value;
+            var name = nameobj.value;
+            var birthday = bthObj.value;
+
+            if(num == "" || num == null){
+                alert("请输入编号");
+                numObj.focus();
+                return;
+            }
+            if(name == "" || name == null){
+                alert("请输入姓名");
+                nameobj.focus();
+                return;
+            }
+
+            if(birthday == "" || birthday == null){
+                alert("请输入出生日期");
+                bthObj.focus();
+                return;
+            }
+
+
+            var tr = document.createElement("tr");
+
+            var nhh = document.createElement("td");
+            nhh.innerHTML = num;
+            tr.appendChild(nhh);
+
+            var nrr = document.createElement("td");
+            nrr.innerHTML = name;
+            tr.appendChild(nrr);
+
+            var ncc = document.createElement("td");
+            ncc.innerHTML = birthday;
+            tr.appendChild(ncc);
+
+            var delnn = document.createElement("td");
+            delnn.innerHTML  = '<a href="#" onclick="del(this)">删除</a>';
+            tr.appendChild(delnn);
+
+            var bbb = document.getElementById("nnn");
+            bbb.appendChild(tr);
+
+
+            numObj.value = "";
+            nameobj.value = "";
+            bthObj.value = "";
+        }
+        function del(a){
+            var tr = a.parentNode.parentNode;
+            /*var tb = document.getElementsByTagName("tbody")[0];*/
+            var tbody = document.getElementById("nnn");
+            tbody.appendChild()
+            tbody.removeChild(tr);/*删除孩子节点*/
+        }
+    </script>
+</head>
+<body>
+<div>
+    编号：<input type="number" id="num"/>
+    姓名：<input type="text" id="name" />
+    出生日期：<input type="date" id="birthday" />
+    <input type="button" value="添加" onclick="addUser()" />
+</div>
+<table>
+    <thead>
+
+    <th>编号</th>
+    <th>姓名</th>
+    <th>出生日期</th>
+    <th>操作</th>
+    </thead>
+
+    <tbody id="nnn">
+    <tr>
+        <td>1</td>
+        <td>zhangsan</td>
+        <td>2010-01-01</td>
+        <td><a th:href="@{/test/{id}(id=${1})}" onclick="del(this)">删除</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
